@@ -1,12 +1,12 @@
-const gifStages = [
-    "images/stage-0-normal.png",      // 0 normal
-    "images/stage-1-confused.png",    // 1 confused
-    "images/stage-2-pleading.png",    // 2 pleading
-    "images/stage-3-sad.png",         // 3 sad
-    "images/stage-4-sadder.png",      // 4 sadder
-    "images/stage-5-devastated.png",  // 5 devastated
-    "images/stage-6-very-devastated.png", // 6 very devastated
-    "images/stage-7-crying.png"       // 7 crying runaway
+const imageStages = [
+    "https://via.placeholder.com/200x200?text=Image+1",
+    "https://via.placeholder.com/200x200?text=Image+2",
+    "https://via.placeholder.com/200x200?text=Image+3",
+    "https://via.placeholder.com/200x200?text=Image+4",
+    "https://via.placeholder.com/200x200?text=Image+5",
+    "https://via.placeholder.com/200x200?text=Image+6",
+    "https://via.placeholder.com/200x200?text=Image+7",
+    "https://via.placeholder.com/200x200?text=Image+8"
 ]
 
 const noMessages = [
@@ -22,20 +22,48 @@ const noMessages = [
 ]
 
 const yesTeasePokes = [
-    "et2ly shwya tab",
-    "et2ly aktr",
-    "baolkkkk et2lyy",
-    "ET@LY BAAAA"
+    "try saying no first... I bet you want to know what happens 😏",
+    "go on, hit no... just once 👀",
+    "you're missing out 😈",
+    "click no, I dare you 😏"
 ]
 
 let yesTeasedCount = 0
 
 let noClickCount = 0
 let runawayEnabled = false
+let musicPlaying = true
 
-const catGif = document.getElementById('cat-gif')
+const mainImage = document.getElementById('main-image')
 const yesBtn = document.getElementById('yes-btn')
 const noBtn = document.getElementById('no-btn')
+const music = document.getElementById('bg-music')
+
+// Autoplay: audio starts muted (bypasses browser policy), unmute immediately
+music.muted = true
+music.volume = 0.3
+music.play().then(() => {
+    music.muted = false
+}).catch(() => {
+    // Fallback: unmute on first interaction
+    document.addEventListener('click', () => {
+        music.muted = false
+        music.play().catch(() => {})
+    }, { once: true })
+})
+
+function toggleMusic() {
+    if (musicPlaying) {
+        music.pause()
+        musicPlaying = false
+        document.getElementById('music-toggle').textContent = '🔇'
+    } else {
+        music.muted = false
+        music.play()
+        musicPlaying = true
+        document.getElementById('music-toggle').textContent = '🔊'
+    }
+}
 
 function handleYesClick() {
     if (!runawayEnabled) {
@@ -76,9 +104,9 @@ function handleNoClick() {
         noBtn.style.fontSize = `${Math.max(noSize * 0.85, 10)}px`
     }
 
-    // Swap cat GIF through stages
-    const gifIndex = Math.min(noClickCount, gifStages.length - 1)
-    swapGif(gifStages[gifIndex])
+    // Swap image through stages
+    const imageIndex = Math.min(noClickCount, imageStages.length - 1)
+    swapImage(imageStages[imageIndex])
 
     // Runaway starts at click 5
     if (noClickCount >= 5 && !runawayEnabled) {
@@ -87,11 +115,11 @@ function handleNoClick() {
     }
 }
 
-function swapGif(src) {
-    catGif.style.opacity = '0'
+function swapImage(src) {
+    mainImage.style.opacity = '0'
     setTimeout(() => {
-        catGif.src = src
-        catGif.style.opacity = '1'
+        mainImage.src = src
+        mainImage.style.opacity = '1'
     }, 200)
 }
 
