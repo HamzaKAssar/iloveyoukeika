@@ -10,15 +10,15 @@ const gifStages = [
 ]
 
 const noMessages = [
-    "No",
-    "Are you positive? 🤔",
-    "Pookie please... 🥺",
-    "If you say no, I will be really sad...",
-    "I will be very sad... 😢",
-    "Please??? 💔",
-    "Don't do this to me...",
-    "Last chance! 😭",
-    "You can't catch me anyway 😜"
+    "Msh Mwafaa",
+    "answer ghlt grbe tany",
+    "Ya keikaaaaa????? grbe tanyyy",
+    "YA SIDRAAAAAAA BTLYYYYYY",
+    "YOHHHHHHHHHHH grbe tany",
+    "AKHER MARA TAB",
+    "LAAAAAAAAAAAAAAAAAA",
+    "ur mine msh mwafea",
+    "tab grbene ba😜"
 ]
 
 const yesTeasePokes = [
